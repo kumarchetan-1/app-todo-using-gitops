@@ -2,11 +2,10 @@ name: Continuous Deployment(Production)
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,11 +26,11 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-week37:latest
+          tags: chetankumar01/todo-app-week37:${{ github.sha }}
 
       - name: Export image URL 
         id: image_url
-        run: echo "url=https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/todo-app-week37" >> $GITHUB_OUTPUT
+        run: echo "url=https://hub.docker.com/r/chetankumar01/todo-app-week37:${{ github.sha }}" >> $GITHUB_OUTPUT
         
       - name: Print dockerhub link
         run: echo "Docker Hub Repo:${{ steps.image_url.outputs.url }}"
