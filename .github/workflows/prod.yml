@@ -29,7 +29,7 @@ jobs:
           file: Dockerfile
           tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-week37:latest
 
-      - name: Export image URL username hashed
+      - name: Export image URL username 
         id: image_url
         run: echo "url=https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/todo-app-week37" >> $GITHUB_OUTPUT
         
