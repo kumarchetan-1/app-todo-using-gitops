@@ -29,3 +29,14 @@ jobs:
           file: Dockerfile
           tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-week39:${{ github.sha }}
 
+      - name : clone staging ops repo, change the image tag and push
+        env:
+          PAT: ${{ secrets.PAT }}
+        run: |
+          git clone https://github.com/kumarchetan-1/argo-deployments.git
+          cd argo-deployments
+
+          sed -i 's|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/todo-app:${{ github.sha }}|' k8s/todo-app.yaml
+          git add .
+          git commit -m "Update image tag to ${github.sha}"
+          git push
