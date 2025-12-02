@@ -29,7 +29,7 @@ jobs:
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops:${{ github.sha }}
 
-      - name : clone staging ops repo, change the image tag and push
+      - name : clone the gitops repo, change the image tag and push
         env:
           PAT: ${{ secrets.PAT }}
         run: |
