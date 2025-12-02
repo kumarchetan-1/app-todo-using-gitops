@@ -36,7 +36,7 @@ jobs:
           git clone https://github.com/kumarchetan-1/argo-deployments.git
           cd argo-deployments
 
-          sed -i 's|image: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops.*|image: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops:${{ github.sha }}|' manifest.yaml
+          sed -i 's|image: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops.*|image: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops:${{ github.sha }}|' manifest.yml
           git config user.name "Github Action Bot"
           git config user.email "actions@github.com" 
 
