@@ -42,5 +42,5 @@ jobs:
 
           git add .
           git commit -m "Update todod app's image tag to ${{github.sha}}"
-          git push "https://${PAT}@github.com:kumarchetan-1/argo-deployments.git" main 
+          git push "https://${PAT}@github.com/kumarchetan-1/argo-deployments.git" main 
   
