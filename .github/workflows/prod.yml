@@ -29,9 +29,18 @@ jobs:
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops:${{ github.sha }}
 
-      - name: Export image URL 
-        id: image_url
-        run: echo "url=https://hub.docker.com/r/${{ vars.DOCKER_USERNAME }}/todo-app-gitops:${{ github.sha }}" >> $GITHUB_OUTPUT
-        
-      - name: Print dockerhub link
-        run: echo "Docker Hub Repo:${{ steps.image_url.outputs.url }}"
+      - name : clone staging ops repo, change the image tag and push
+        env:
+          PAT: ${{ secrets.PAT }}
+        run: |
+          git clone https://github.com/kumarchetan-1/argo-deployments.git
+          cd argo-deployments
+
+          sed -i 's|image: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops.*|image: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops:${{ github.sha }}|' manifest.yaml
+          git config user.name "Github Action Bot"
+          git config user.email "actions@github.com" 
+
+          git add .
+          git commit -m "Update todod app's image tag to ${{github.sha}}"
+          git push "https://${PAT}@github.com/kumarchetan-1/argo-deployments.git" main 
+  
