@@ -30,7 +30,7 @@ jobs:
 
       - name: Export image URL 
         id: image_url
-        run: echo "url=https://hub.docker.com/r/${{ vars.DOCKER_USERNAME }}/todo-app-week37:${{ github.sha }}" >> $GITHUB_OUTPUT
+        run: echo "url=https://hub.docker.com/r/${{ vars.DOCKER_USERNAME }}/todo-app-gitops:${{ github.sha }}" >> $GITHUB_OUTPUT
         
       - name: Print dockerhub link
         run: echo "Docker Hub Repo:${{ steps.image_url.outputs.url }}"
