@@ -23,7 +23,7 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          tags: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops:latest
+          tags: ${{ vars.DOCKER_USERNAME }}/todo-app-gitops:${{ github.sha }}
 
       - name: Export image URL 
         id: image_url
