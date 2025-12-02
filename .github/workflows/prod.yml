@@ -15,7 +15,7 @@ jobs:
       - name : docker login
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name : docker buildx
@@ -26,11 +26,11 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          tags: chetankumar01/todo-app-week37:${{ github.sha }}
+          tags: ${{ vars.DOCKER_USERNAME }}/todo-app-week37:${{ github.sha }}
 
       - name: Export image URL 
         id: image_url
-        run: echo "url=https://hub.docker.com/r/chetankumar01/todo-app-week37:${{ github.sha }}" >> $GITHUB_OUTPUT
+        run: echo "url=https://hub.docker.com/r/${{ vars.DOCKER_USERNAME }}/todo-app-week37:${{ github.sha }}" >> $GITHUB_OUTPUT
         
       - name: Print dockerhub link
         run: echo "Docker Hub Repo:${{ steps.image_url.outputs.url }}"
