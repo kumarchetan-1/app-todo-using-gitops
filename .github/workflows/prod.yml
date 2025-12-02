@@ -28,7 +28,7 @@ jobs:
           context: .
           file: Dockerfile
           tags: |
-                chetankumar01todo-app-week39:${{ github.sha }}
+                chetankumar01/todo-app-week39:${{ github.sha }}
                 chetankumar01/todo-app-week39:latest
 
       - name: Export image URL
