@@ -19,18 +19,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name : docker buildx
+        uses: docker/setup-buildx-action@v2
+
       - name : docker build and push image to docker hub
         uses: docker/build-push-action@v4
         with:
           context: .
           file: Dockerfile
           tags: |
-                ${{ secrets.DOCKER_USERNAME }}/todo-app-week39:${{ github.sha }}
-                ${{ secrets.DOCKER_USERNAME }}/todo-app-week39:latest
+                ${{ secrets.DOCKER_USERNAME }}/todo-app-week37:${{ github.sha }}
+                ${{ secrets.DOCKER_USERNAME }}/todo-app-week37:latest
 
       - name: Export image URL
         id: image_url
-        run: echo "url=https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/todo-app-week39" >> $GITHUB_OUTPUT
+        run: echo "url=https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/todo-app-week37" >> $GITHUB_OUTPUT
         
       - name: Print dockerhub link
         run: echo "Docker Hub Repo:${{ steps.image_url.outputs.url }}"
