@@ -31,3 +31,9 @@ jobs:
                 ${{ secrets.DOCKER_USERNAME }}/todo-app-week39:${{ github.sha }}
                 ${{ secrets.DOCKER_USERNAME }}/todo-app-week39:latest
 
+      - name: Export image URL
+        id: image_url
+        run: echo "url=https://hub.docker.com/r/${{ secrets.DOCKER_USERNAME }}/todo-app-week39" >> $GITHUB_OUTPUT
+        
+      - name: Print dockerhub link
+        run: echo "Docker Hub Repo:${{ steps.image_url.outputs.url }}"
